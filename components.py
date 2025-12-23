@@ -62,6 +62,9 @@ class Board:
         self.game_over = False
         self.win = False
 
+        # [리뷰 반영] 힌트 남은 횟수 변수 추가 (기본3회)
+        self.hints_left = 3
+
     def index(self, col: int, row: int) -> int:
         """Return the flat list index for (col,row)."""
         return row * self.cols + col
@@ -176,6 +179,10 @@ class Board:
 
     # [Issue #3] 힌트 기능: 안전한 미오픈 칸 하나를 무작위로 오픈
     def reveal_hint(self) -> None:
+        # [리뷰 반영] 힌트가 남아있는지 확인 (0개면 실행 불가)
+        if self.hints_left <= 0:
+            print("No hints left!")
+            return
         # 1. 힌트 후보 찾기 (아직 안 열림 + 지뢰 아님 + 깃발 안 꽂힘)
         candidates = []
         for cell in self.cells:
@@ -186,6 +193,10 @@ class Board:
         if candidates:
             col, row = random.choice(candidates)
             self.reveal(col, row)
+
+            # 횟수 차감
+            self.hints_left -= 1
+            print(f"Hint used! Remaining hints: {self.hints_left}")
 
     def toggle_flag(self, col: int, row: int) -> None:
         # TODO: Toggle a flag on a non-revealed cell.

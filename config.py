@@ -81,3 +81,7 @@ result_overlay_alpha = 120
 # Misc
 title = "Minesweeper"
 
+# [Issue #5] 타이머 관련 설정 상수
+TIMER_MAX_SECONDS = 999         # 타이머 최대 표시 시간
+TIMER_WARNING_THRESHOLD = 60    # 경고 색상으로 변경되는 기준 시간 (초)
+TIMER_WARNING_COLOR = (255, 50, 50) # 경고 색상 (빨강)

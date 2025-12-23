@@ -237,14 +237,14 @@ class Game:
         elapsed_sec = elapsed_ms // 1000
 
         # 2. 999초 제한 로직 (디테일 추가)
-        if elapsed_sec > 999:
-            time_text = "999+"
+        if elapsed_sec > config.TIMER_MAX_SECONDS:
+            time_text = f"{config.TIMER_MAX_SECONDS}+"
         else:
             time_text = self._format_time(elapsed_ms)
 
         # 3. 60초 경과 시 빨간색 경로 로직 (디테일 추가)
-        if elapsed_sec >= 60:
-            current_time_color = (255, 50, 50) #빨간색
+        if elapsed_sec >= config.TIMER_WARNING_THRESHOLD:
+            current_time_color = config.TIMER_WARNING_COLOR
         else:
             current_time_color = config.color_header_text #기본 흰색
 
